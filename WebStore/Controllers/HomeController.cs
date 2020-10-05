@@ -43,5 +43,16 @@ namespace WebStore.Controllers
             return View(_employees);
         }
 
+        // /home/EmployeeDetails/1
+        public IActionResult EmployeeDetails(int id)
+        {
+            var employeeViewModel = _employees.FirstOrDefault(x => x.Id == id);
+
+            //Если такого не существует
+            if (employeeViewModel == null)
+                return NotFound(); // возвращаем результат 404 Not Found
+
+            return View(employeeViewModel);
+        }
     }
 }
