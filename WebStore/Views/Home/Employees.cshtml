@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WebStore.ViewModels.EmployeeViewModel>
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.SurName</td>
+            <td>@item.Patronymic</td>
+        </tr>
+    }
+</table>
