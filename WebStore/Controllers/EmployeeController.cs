@@ -7,7 +7,7 @@ using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
-    public class HomeController : Controller
+    public class EmployeeController : Controller
     {
         private readonly List<EmployeeViewModel> _employees = new List<EmployeeViewModel>
         {
