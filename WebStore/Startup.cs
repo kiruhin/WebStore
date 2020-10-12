@@ -26,6 +26,15 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(SimpleActionFilter)); // подключение по типу
+
+                // альтернативный вариант подключения
+                //options.Filters.Add(new SimpleActionFilter()); // подключение по объекту
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +75,7 @@ namespace WebStore
             {
                 await context.Response.WriteAsync("Привет из конвейера обработки запроса (метод app.Run())");
             });
-       }
+        }
 
         private void UseMiddlewareSample(IApplicationBuilder app)
         {
