@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<WebStore.ViewModels.EmployeeViewModel>
 
-<table class="table">
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
-            <td>@item.FirstName</td>
-            <td>@item.SurName</td>
-            <td>@item.Patronymic</td>
-            <td>
-                @Html.ActionLink("Детали", "EmployeeDetails", new { id = item.Id })
-            </td>
-        </tr>
-    }
-</table>
+    <a asp-action="Edit" class="btn btn-success">Добавить</a>
+
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
+                <td>@item.FirstName</td>
+                <td>@item.SurName</td>
+                <td>@item.Patronymic</td>
+                <td>
+                    @Html.ActionLink("Детали", "EmployeeDetails", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>

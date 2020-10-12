@@ -37,6 +37,8 @@ namespace WebStore
                 //options.Filters.Add(new SimpleActionFilter()); // подключение по объекту
             });
 
+            //services.AddTransient<IEmployeesService, InMemoryEmployeesService>();
+            //services.AddScoped<IEmployeesService, InMemoryEmployeesService>();
             services.AddSingleton<IEmployeesService, InMemoryEmployeesService>();
         }
 
