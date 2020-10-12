@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Infrastructure.Interfaces;
 using WebStore.ViewModels;
 
 namespace WebStore.Controllers
@@ -10,27 +11,12 @@ namespace WebStore.Controllers
     [Route("users")]
     public class EmployeeController : Controller
     {
-        private readonly List<EmployeeViewModel> _employees = new List<EmployeeViewModel>
+        private readonly IEmployeesService _employeesService;
+
+        public EmployeeController(IEmployeesService employeesService)
         {
-            new EmployeeViewModel
-            {
-                Id = 1,
-                FirstName = "Иван",
-                SurName = "Иванов",
-                Patronymic = "Иванович",
-                Age = 22,
-                Position = "Начальник"
-            },
-            new EmployeeViewModel
-            {
-                Id = 2,
-                FirstName = "Владислав",
-                SurName = "Петров",
-                Patronymic = "Иванович",
-                Age = 35,
-                Position = "Программист"
-            }
-        };
+            _employeesService = employeesService;
+        }
 
         // /users/all
         [Route("idx")]
@@ -43,14 +29,14 @@ namespace WebStore.Controllers
         [Route("list")]
         public IActionResult Employees()
         {
-            return View(_employees);
+            return View(_employeesService.GetAll());
         }
 
         // /users/1
         [Route("{id}")]
         public IActionResult EmployeeDetails(int id)
         {
-            var employeeViewModel = _employees.FirstOrDefault(x => x.Id == id);
+            var employeeViewModel = _employeesService.GetById(id);
 
             //Если такого не существует
             if (employeeViewModel == null)
@@ -58,5 +44,47 @@ namespace WebStore.Controllers
 
             return View(employeeViewModel);
         }
+
+        [HttpGet]
+        [Route("edit/{id?}")]
+        public IActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+                return View(new EmployeeViewModel());
+
+            var model = _employeesService.GetById(id.Value);
+            if (model == null)
+                return NotFound();// возвращаем результат 404 Not Found
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("edit/{id?}")]
+        public IActionResult Edit(EmployeeViewModel model)
+        {
+            if (model.Id > 0) // если есть Id, то редактируем модель
+            {
+                var dbItem = _employeesService.GetById(model.Id);
+
+                if (ReferenceEquals(dbItem, null))
+                    return NotFound();// возвращаем результат 404 Not Found
+
+                dbItem.FirstName = model.FirstName;
+                dbItem.SurName = model.SurName;
+                dbItem.Age = model.Age;
+                dbItem.Patronymic = model.Patronymic;
+                dbItem.Position = model.Position;
+            }
+            else // иначе добавляем модель в список
+            {
+                _employeesService.AddNew(model);
+            }
+
+            _employeesService.Commit(); 
+
+            return RedirectToAction(nameof(Employees));
+        }
+
     }
 }

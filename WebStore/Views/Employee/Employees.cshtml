@@ -4,6 +4,7 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></td>
             <td>@item.FirstName</td>
             <td>@item.SurName</td>
             <td>@item.Patronymic</td>

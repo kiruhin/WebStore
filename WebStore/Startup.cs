@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.Infrastructure;
+using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Services;
 
 namespace WebStore
 {
@@ -35,6 +37,7 @@ namespace WebStore
                 //options.Filters.Add(new SimpleActionFilter()); // подключение по объекту
             });
 
+            services.AddSingleton<IEmployeesService, InMemoryEmployeesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
