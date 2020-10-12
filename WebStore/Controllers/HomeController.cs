@@ -21,6 +21,9 @@ namespace WebStore.Controllers
 
             //return new EmptyResult();
             //return Content("Hello from controller");
+
+            //throw new Exception("Упс. Что-то пошло не так...");
+
             return View();
         }
 
