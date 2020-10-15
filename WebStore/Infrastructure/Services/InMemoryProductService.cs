@@ -19,7 +19,7 @@ namespace WebStore.Infrastructure.Services
                 new Category()
                 {
                     Id = 1,
-                    Name = "Sportswear",
+                    Name = "Sportswear 2",
                     Order = 0,
                     ParentId = null
                 },
