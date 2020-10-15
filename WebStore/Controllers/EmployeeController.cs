@@ -18,14 +18,14 @@ namespace WebStore.Controllers
             _employeesService = employeesService;
         }
 
-        // /users/all
+        // /users/idx
         [Route("idx")]
         public IActionResult Index()
         {
             return View();
         }
 
-        // /users/Employees
+        // /users/list
         [Route("list")]
         public IActionResult Employees()
         {
@@ -58,11 +58,26 @@ namespace WebStore.Controllers
 
             return View(model);
         }
+        public IActionResult List2()
+        {
+            return View();
+        }
 
         [HttpPost]
         [Route("edit/{id?}")]
         public IActionResult Edit(EmployeeViewModel model)
         {
+            if (model.Age < 18 || model.Age > 100)
+            {
+                ModelState.AddModelError("Age", "Ошибка возраста!");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                // Если не валидна, возвращаем ее на представление
+                return View(model);
+            }
+
             if (model.Id > 0) // если есть Id, то редактируем модель
             {
                 var dbItem = _employeesService.GetById(model.Id);
