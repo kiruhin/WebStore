@@ -12,5 +12,4 @@ namespace WebStore.Domain.Entities
 
         public int Order { get; set; }
     }
-
 }

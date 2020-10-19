@@ -27,5 +27,4 @@ namespace WebStore.ViewModels
         /// </summary>
         public CategoryViewModel ParentCategory { get; set; }
     }
-
 }

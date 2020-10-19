@@ -1,4 +1,4 @@
-﻿
+﻿@model WebStore.ViewModels.CatalogViewModel
 @{
     ViewData["Title"] = "Shop";
 }
@@ -11,7 +11,7 @@
             @await Html.PartialAsync("_Partial/_LeftSideBar")
         </div>
         <div class="col-sm-9 padding-right">
-            @await Html.PartialAsync("_Partial/_FeaturedItems")
+            @await Html.PartialAsync("_Partial/_ProductItems", Model.Products)
             <ul class="pagination">
                 <li class="active"><a href="">1</a></li>
                 <li><a href="">2</a></li>
