@@ -1,43 +1,47 @@
 ﻿@model IEnumerable<WebStore.ViewModels.CategoryViewModel>
 
-    <h2>Category</h2>
-    <div class="panel-group category-products" id="accordian">
-        <!--category-productsr-->
-        @foreach (var parentCategory in Model)
+<h2>Category</h2>
+<div class="panel-group category-products" id="accordian">
+    <!--category-productsr-->
+    @foreach (var parentCategory in Model)
+    {
+        if (parentCategory.ChildCategories.Count > 0) // если есть дочерние категории
         {
-            if (parentCategory.ChildCategories.Count > 0) // если есть дочерние категории
-            {
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordian" href="#@parentCategory.Name.ToLower()">
-                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                @parentCategory.Name
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="@parentCategory.Name.ToLower()" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul>
-                                @foreach (var childCategory in parentCategory.ChildCategories)
-                                {
-                                    <li><a asp-controller="Catalog" asp-action="Shop" asp-route-CategoryId="@childCategory.Id"></li>
-                                }
-                            </ul>
-                        </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordian" href="#@parentCategory.Name.ToLower()">
+                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                            @parentCategory.Name
+                        </a>
+                    </h4>
+                </div>
+                <div id="@parentCategory.Name.ToLower()" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (var childCategory in parentCategory.ChildCategories)
+                            {
+                                <li>
+                                    <a asp-controller="Catalog" asp-action="Shop" asp-route-CategoryId="@childCategory.Id">
+                                        @childCategory.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
                     </div>
                 </div>
-            }
-            else // если нет дочерних элементов
-            {
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a asp-controller="Catalog" asp-action="Shop" asp-route-CategoryId="@parentCategory.Id">@parentCategory.Name</a>
-                        </h4>
-                    </div>
-                </div>
-            }
+            </div>
         }
+        else // если нет дочерних элементов
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a asp-controller="Catalog" asp-action="Shop" asp-route-CategoryId="@parentCategory.Id">@parentCategory.Name</a>
+                    </h4>
+                </div>
+            </div>
+        }
+    }
 
-    </div><!--/category-products-->
+</div><!--/category-products-->
