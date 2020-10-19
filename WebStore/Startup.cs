@@ -42,7 +42,7 @@ namespace WebStore
             //services.AddTransient<IEmployeesService, InMemoryEmployeesService>();
             //services.AddScoped<IEmployeesService, InMemoryEmployeesService>();
             services.AddSingleton<IEmployeesService, InMemoryEmployeesService>();
-            services.AddSingleton<IProductService, InMemoryProductService>();
+            services.AddScoped<IProductService, SqlProductService>();
 
             services.AddDbContext<WebStoreContext>(options => options
                 .UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
