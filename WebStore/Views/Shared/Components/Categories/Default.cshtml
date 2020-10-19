@@ -21,7 +21,7 @@
                             <ul>
                                 @foreach (var childCategory in parentCategory.ChildCategories)
                                 {
-                                    <li><a href="#">@childCategory.Name</a></li>
+                                    <li><a asp-controller="Catalog" asp-action="Shop" asp-route-CategoryId="@childCategory.Id"></li>
                                 }
                             </ul>
                         </div>
@@ -32,7 +32,9 @@
             {
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title"><a href="#">@parentCategory.Name</a></h4>
+                        <h4 class="panel-title">
+                            <a asp-controller="Catalog" asp-action="Shop" asp-route-CategoryId="@parentCategory.Id">@parentCategory.Name</a>
+                        </h4>
                     </div>
                 </div>
             }
