@@ -12,6 +12,7 @@ namespace WebStore.Domain.Entities
         public int? BrandId { get; set; }
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
+        //public string Manufacturer { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
