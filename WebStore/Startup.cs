@@ -83,10 +83,10 @@ namespace WebStore
                 options.SlidingExpiration = true;
             });
 
-    }
+        }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -95,7 +95,10 @@ namespace WebStore
 
             app.UseStaticFiles();
 
+            app.UseRouting();
+
             app.UseAuthentication();
+            app.UseAuthorization();
 
             var hello = _configuration["CustomHelloWorld"];
             //var logLevel = _configuration["Logging:LogLevel:Default"];
@@ -105,8 +108,6 @@ namespace WebStore
             UseMiddlewareSample(app);
 
             app.UseMiddleware<TokenMiddleware>();
-
-            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {

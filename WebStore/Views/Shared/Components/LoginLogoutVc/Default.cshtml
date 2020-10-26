@@ -1,7 +1,9 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
     <span>Здравствуйте, @User.Identity.Name</span>
-    //разлогиниться - реализовать дома
+    <form method="post" asp-controller="Account" asp-action="Logout" asp-antiforgery="true">
+        <input type="submit" value="Выход" class="btn btn-default" />
+    </form>
 }
 else
 {
