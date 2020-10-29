@@ -1,0 +1,38 @@
+﻿@model List<WebStore.ViewModels.UserOrderViewModel>
+@{
+    Layout = "Partial/_ProfileLayout";
+    ViewData["Title"] = "Orders";
+}
+
+<h2>Orders</h2>
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Номер
+        </th>
+        <th>
+            Имя
+        </th>
+        <th>
+            Адрес
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th>
+            Сумма заказа
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Address</td>
+            <td>@item.Phone</td>
+            <td>@item.TotalSum.ToString("C")</td>
+        </tr>
+    }
+</table>
