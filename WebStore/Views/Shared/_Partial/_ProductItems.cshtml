@@ -9,9 +9,11 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="~/images/home/@item.ImageUrl" alt="" />
-                        <h2>@item.Price.ToString("C")</h2>
-                        <p>@item.Name</p>
+                        <a asp-controller="Catalog" asp-action="ProductDetails" asp-route-id="@item.Id">
+                            <img src="~/images/home/@item.ImageUrl" alt="" />
+                            <h2>@item.Price.ToString("C")</h2>
+                            <p>@item.Name</p>
+                        </a>
                         <a asp-controller="Cart"
                            asp-action="AddToCart"
                            asp-route-id="@item.Id"

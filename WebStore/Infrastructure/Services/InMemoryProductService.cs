@@ -424,5 +424,9 @@ namespace WebStore.Infrastructure.Services
             return products;
         }
 
+        public Product GetProductById(int id)
+        {
+            return _products.FirstOrDefault(x => x.Id == id);
+        }
     }
 }
